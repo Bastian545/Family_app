@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/bsoto/Desktop/ProyectosKotlin/Familyapp/app/src/main/res/drawable/item_layout_bg.xml" value="0.1" />
         <entry key="..\:/Users/bsoto/Desktop/ProyectosKotlin/Familyapp/app/src/main/res/drawable/splash.xml" value="0.159" />
         <entry key="..\:/Users/bsoto/Desktop/ProyectosKotlin/Familyapp/app/src/main/res/layout/activity_main.xml" value="0.2006340579710145" />
         <entry key="..\:/Users/bsoto/Desktop/ProyectosKotlin/Familyapp/app/src/main/res/layout/content_main.xml" value="0.14513677811550152" />
         <entry key="..\:/Users/bsoto/Desktop/ProyectosKotlin/Familyapp/app/src/main/res/layout/fragment_first.xml" value="0.2006340579710145" />
+        <entry key="..\:/Users/bsoto/Desktop/ProyectosKotlin/Familyapp/app/src/main/res/layout/fragment_second.xml" value="0.29791666666666666" />
+        <entry key="..\:/Users/bsoto/Desktop/ProyectosKotlin/Familyapp/app/src/main/res/layout/product_item_view.xml" value="0.5" />
       </map>
     </option>
   </component>
