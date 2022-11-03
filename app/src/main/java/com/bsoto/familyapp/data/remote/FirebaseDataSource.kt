@@ -6,14 +6,25 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
 class FirebaseDataSource {
-    suspend fun getProducts(): Resource<List<Product>>{
+    suspend fun getProducts(): Resource<List<Product>> {
         val productList = mutableListOf<Product>()
         val querySnapshot = FirebaseFirestore.getInstance().collection("products").get().await()
-        for(product in querySnapshot.documents){
+        for (product in querySnapshot.documents) {
             product.toObject(Product::class.java)?.let { it ->
                 productList.add(it)
             }
         }
         return Resource.Success(productList)
+    }
+
+    suspend fun newProduct(name: String, comment: String, quantity: Int) {
+        val querySnapshot = FirebaseFirestore.getInstance().collection("products")
+        querySnapshot.add(
+            Product(
+                name = name,
+                comment = comment,
+                quantity = quantity
+            )
+        )
     }
 }

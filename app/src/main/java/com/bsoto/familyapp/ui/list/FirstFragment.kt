@@ -14,7 +14,6 @@ import com.bsoto.familyapp.data.model.Product
 import com.bsoto.familyapp.data.model.ProductList
 import com.bsoto.familyapp.data.remote.FirebaseDataSource
 import com.bsoto.familyapp.databinding.FragmentFirstBinding
-import com.bsoto.familyapp.databinding.ProductItemViewBinding
 import com.bsoto.familyapp.domain.repo.ProductRepoImpl
 import com.bsoto.familyapp.presentation.ListViewModel
 import com.bsoto.familyapp.presentation.ListViewModelFactory
@@ -46,12 +45,14 @@ class FirstFragment : Fragment() {
         viewModel.fetchProducts().observe(viewLifecycleOwner, Observer {
             when (it){
                 is Resource.Loading -> {
-                    Toast.makeText(requireContext(),"Cargando", Toast.LENGTH_SHORT).show()
+                   binding.progressBar.visibility = View.VISIBLE
                 }
                 is Resource.Success -> {
+                    binding.progressBar.visibility = View.GONE
                     binding.rvProductList.adapter = ProductAdapter(it.data)
                 }
                 is Resource.Failure -> {
+                    binding.progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(),"Ocurrio un error: ${it.exception}", Toast.LENGTH_SHORT).show()
                 }
             }

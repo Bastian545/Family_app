@@ -9,7 +9,8 @@ class ProductRepoImpl(
 ): ProductRepo {
     override suspend fun getProducts(): Resource<List<Product>> = firebaseDataSource.getProducts()
 
-    override suspend fun newProduct(): Product {
-        TODO("Not yet implemented")
+    override suspend fun newProduct(name: String,comment: String, quantity: Int) {
+        firebaseDataSource.newProduct(name,comment,quantity)
     }
 }
+

@@ -5,5 +5,5 @@ import com.bsoto.familyapp.data.model.Product
 
 interface ProductRepo {
     suspend fun getProducts(): Resource<List<Product>>
-    suspend fun newProduct(): Product
+    suspend fun newProduct(name: String = "", comment: String = "", quantity: Int = 0)
 }
