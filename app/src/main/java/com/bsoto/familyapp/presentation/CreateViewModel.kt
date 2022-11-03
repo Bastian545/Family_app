@@ -1,25 +1,29 @@
 package com.bsoto.familyapp.presentation
 
+import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.bsoto.familyapp.core.Resource
 import com.bsoto.familyapp.domain.repo.ProductRepo
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.Dispatchers
 
 class CreateViewModel(
     private val repo: ProductRepo
 ): ViewModel() {
 
-    fun createProduct() = liveData(Dispatchers.IO) {
+    fun createProduct(name: String, comment: String, quantity: Int) = liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
         try {
-            emit(repo.newProduct())
+            emit(Resource
+                .Success(repo.newProduct(name,comment,quantity)))
         }catch (e: Exception){
             emit(Resource.Failure(e))
         }
     }
 }
-
 
 
 

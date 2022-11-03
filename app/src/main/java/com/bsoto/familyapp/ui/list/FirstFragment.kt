@@ -1,17 +1,17 @@
 package com.bsoto.familyapp.ui.list
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bsoto.familyapp.R
 import com.bsoto.familyapp.core.Resource
 import com.bsoto.familyapp.data.model.Product
-import com.bsoto.familyapp.data.model.ProductList
 import com.bsoto.familyapp.data.remote.FirebaseDataSource
 import com.bsoto.familyapp.databinding.FragmentFirstBinding
 import com.bsoto.familyapp.domain.repo.ProductRepoImpl
@@ -35,12 +35,20 @@ class FirstFragment : Fragment() {
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
 
+
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
 
         val productList = listOf(Product())
+
+        binding.floatNew.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
 
         viewModel.fetchProducts().observe(viewLifecycleOwner, Observer {
             when (it){
@@ -65,4 +73,7 @@ class FirstFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
+
 }

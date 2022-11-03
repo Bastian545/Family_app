@@ -17,13 +17,13 @@ class FirebaseDataSource {
         return Resource.Success(productList)
     }
 
-    suspend fun newProduct(name: String, comment: String, quantity: Int) {
-        val querySnapshot = FirebaseFirestore.getInstance().collection("products")
-        querySnapshot.add(
+     suspend fun newProduct(name: String, comment: String, quantity: Int) {
+         FirebaseFirestore.getInstance().collection("products").add(
             Product(
                 name = name,
                 comment = comment,
-                quantity = quantity
+                quantity = quantity,
+                check = false
             )
         )
     }

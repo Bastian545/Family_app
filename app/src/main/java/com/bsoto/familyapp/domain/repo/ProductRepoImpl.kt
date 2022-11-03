@@ -8,9 +8,9 @@ class ProductRepoImpl(
     private val firebaseDataSource: FirebaseDataSource
 ): ProductRepo {
     override suspend fun getProducts(): Resource<List<Product>> = firebaseDataSource.getProducts()
-
     override suspend fun newProduct(name: String,comment: String, quantity: Int) {
-        firebaseDataSource.newProduct(name,comment,quantity)
+    firebaseDataSource.newProduct(name,comment,quantity)
     }
+
 }
 
