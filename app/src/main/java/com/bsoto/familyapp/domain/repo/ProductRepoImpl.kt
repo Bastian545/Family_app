@@ -11,6 +11,9 @@ class ProductRepoImpl(
     override suspend fun newProduct(name: String,comment: String, quantity: Int) {
     firebaseDataSource.newProduct(name,comment,quantity)
     }
+    override suspend fun deleteProduct(id: String) {
+        firebaseDataSource.deleteProduct(id)
+    }
 
 }
 

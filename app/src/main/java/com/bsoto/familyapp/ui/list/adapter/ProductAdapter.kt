@@ -34,4 +34,6 @@ class ProductAdapter(private val productList: List<Product>):RecyclerView.Adapte
         }
 
     }
+
+
 }

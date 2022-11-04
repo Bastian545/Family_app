@@ -19,6 +19,16 @@ class ListViewModel(
             emit(Resource.Failure(e))
         }
     }
+
+    fun deleteProduct(id: String) = liveData(Dispatchers.IO) {
+        emit(Resource.Loading())
+        try {
+            emit(Resource
+                .Success(repo.deleteProduct(id)))
+        }catch (e: Exception){
+            emit(Resource.Failure(e))
+        }
+    }
 }
 
 class ListViewModelFactory(private val repo: ProductRepo): ViewModelProvider.Factory {

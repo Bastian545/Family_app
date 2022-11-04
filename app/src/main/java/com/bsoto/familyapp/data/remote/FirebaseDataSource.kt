@@ -27,4 +27,8 @@ class FirebaseDataSource {
             )
         )
     }
+
+    suspend fun deleteProduct(id: String){
+        FirebaseFirestore.getInstance().collection("products").document(id).delete()
+    }
 }
