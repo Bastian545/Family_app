@@ -38,7 +38,7 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
                 0
             }
             if (name.equals("")) {
-                Toast.makeText(requireContext(), "Ingresar Nombre Producto", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), "Ingrese Nombre del Producto", Toast.LENGTH_SHORT)
                     .show()
                     binding.txtProduct.requestFocus()
             } else {
@@ -47,10 +47,10 @@ class SecondFragment : Fragment(R.layout.fragment_second) {
                 ).observe(viewLifecycleOwner, { result ->
                     when (result) {
                         is Resource.Loading -> {
-                            Toast.makeText(requireContext(), "Cargando", Toast.LENGTH_SHORT).show()
                         }
                         is Resource.Success -> {
                             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+                            Toast.makeText(requireContext(), "Producto Agregado", Toast.LENGTH_SHORT).show()
                         }
                         is Resource.Failure -> {
                             Toast.makeText(

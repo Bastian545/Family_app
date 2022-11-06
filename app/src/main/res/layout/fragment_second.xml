@@ -51,7 +51,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="@string/comentario_adicional">
+            android:hint="@string/comentario_adicional"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txt_comment"
@@ -62,7 +63,6 @@
                 android:imeOptions="actionDone"
                 />
         </com.google.android.material.textfield.TextInputLayout>
-
 
     </LinearLayout>
 

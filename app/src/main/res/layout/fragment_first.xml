@@ -10,26 +10,30 @@
     <RelativeLayout
         android:visibility="gone"
         android:id="@+id/progress_bar"
-        android:background="@color/main_blue"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ProgressBar
-            android:layout_width="wrap_content"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"/>
-
+            app:lottie_url="https://assets10.lottiefiles.com/packages/lf20_6pgBO2srnh.json"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            />
     </RelativeLayout>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_productList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/float_new"
@@ -42,4 +46,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@android:color/white" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>

@@ -1,11 +1,13 @@
 package com.bsoto.familyapp.ui.list
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -38,9 +40,6 @@ class FirstFragment : Fragment() {
     ): View? {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
-
-
-
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
             0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -105,10 +104,10 @@ class FirstFragment : Fragment() {
         ).observe(viewLifecycleOwner, { result ->
             when (result) {
                 is Resource.Loading -> {
-                    Toast.makeText(requireContext(), "Cargando", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Success -> {
                     findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+                    Toast.makeText(requireContext(), "Producto Eliminado", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Failure -> {
                     Toast.makeText(
