@@ -1,13 +1,11 @@
 package com.bsoto.familyapp.ui.list
 
 import android.os.Bundle
-import android.transition.TransitionInflater
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -40,33 +38,13 @@ class FirstFragment : Fragment() {
     ): View? {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
-            0,
-            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-        ) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                delete("3puNjS1YcYo7rwObrYVv"
-                )
-                binding.rvProductList.adapter?.notifyItemRemoved(viewHolder.absoluteAdapterPosition)
-            }
-        }).attachToRecyclerView(binding.rvProductList)
-
-
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val productList = listOf(Product())
-
+        var adapter = ProductAdapter(productList)
         binding.floatNew.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
@@ -78,6 +56,7 @@ class FirstFragment : Fragment() {
                 }
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
+                    adapter = ProductAdapter(it.data)
                     binding.rvProductList.adapter = ProductAdapter(it.data)
                 }
                 is Resource.Failure -> {
@@ -91,6 +70,21 @@ class FirstFragment : Fragment() {
             }
         })
         binding.rvProductList.adapter = ProductAdapter(productList)
+
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                delete(adapter.getItem(viewHolder.absoluteAdapterPosition))
+            }
+        }).attachToRecyclerView(binding.rvProductList)
+
+
     }
 
     override fun onDestroyView() {
@@ -98,27 +92,24 @@ class FirstFragment : Fragment() {
         _binding = null
     }
 
-    fun delete(id: String) {
-        viewModel.deleteProduct(
-            id
-        ).observe(viewLifecycleOwner, { result ->
-            when (result) {
-                is Resource.Loading -> {
-                }
-                is Resource.Success -> {
-                    findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-                    Toast.makeText(requireContext(), "Producto Eliminado", Toast.LENGTH_SHORT).show()
-                }
-                is Resource.Failure -> {
-                    Toast.makeText(
-                        requireContext(),
-                        "Ocurrio un error: ${result.exception}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        })
-    }
-
-
+    fun delete(product: String ) {
+      viewModel.deleteProduct(
+          product
+      ).observe(viewLifecycleOwner, { result ->
+          when (result) {
+              is Resource.Loading -> {
+              }
+              is Resource.Success -> {
+                  Toast.makeText(requireContext(), "Producto Eliminado", Toast.LENGTH_SHORT).show()
+              }
+              is Resource.Failure -> {
+                  Toast.makeText(
+                      requireContext(),
+                      "Ocurrio un error: ${result.exception}",
+                      Toast.LENGTH_LONG
+                  ).show()
+              }
+          }
+      })
+  }
 }

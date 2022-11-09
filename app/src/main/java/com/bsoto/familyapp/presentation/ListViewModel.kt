@@ -20,7 +20,7 @@ class ListViewModel(
         }
     }
 
-    fun deleteProduct(id: String) = liveData(Dispatchers.IO) {
+    fun deleteProduct(id: String) = liveData(Dispatchers.Main) {
         emit(Resource.Loading())
         try {
             emit(Resource
