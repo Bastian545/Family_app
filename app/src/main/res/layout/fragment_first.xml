@@ -10,15 +10,17 @@
     <RelativeLayout
         android:visibility="gone"
         android:id="@+id/progress_bar"
-        android:background="@color/white"
+        android:background="@color/main_blue"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        >
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:lottie_url="https://assets10.lottiefiles.com/packages/lf20_6pgBO2srnh.json"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:lottie_url="https://assets4.lottiefiles.com/packages/lf20_tmnc73b6.json"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             />

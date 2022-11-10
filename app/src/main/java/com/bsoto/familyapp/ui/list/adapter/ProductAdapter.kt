@@ -33,7 +33,7 @@ class ProductAdapter(private val productList: List<Product>) :
 
     fun getItem(position: Int): String {
         if (position < productList.size) {
-            return productList.get(position).id;
+            return productList.get(position).id
         }
         return productList.get(position-1).id
     }
@@ -43,9 +43,13 @@ class ProductAdapter(private val productList: List<Product>) :
         val binding: ProductItemViewBinding
     ) : BaseViewHolder<Product>(binding.root) {
         override fun bind(item: Product) {
+            if(item.quantity !=0){
+                binding.rvQuantity.text = "Cantidad: ${item.quantity}"
+            }
+
             binding.rvName.text = item.name
             binding.rvComment.text = item.comment
-            binding.rvQuantity.text = "Cantidad: ${item.quantity.toString()}"
+
         }
     }
 }
