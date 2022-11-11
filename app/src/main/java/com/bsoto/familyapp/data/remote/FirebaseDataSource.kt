@@ -10,7 +10,7 @@ import java.time.LocalDate
 import java.util.*
 
 class FirebaseDataSource {
-    suspend fun getProducts(): Resource<List<Product>> {
+    suspend fun getProducts(): Resource<MutableList<Product>> {
         val productList = mutableListOf<Product>()
         val querySnapshot = FirebaseFirestore.getInstance().collection("products").get().await()
         for (product in querySnapshot.documents) {

@@ -35,7 +35,7 @@ class FirstFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
@@ -43,7 +43,7 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val productList = listOf(Product())
+        val productList = mutableListOf<Product>()
         var adapter = ProductAdapter(productList)
         binding.floatNew.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
@@ -80,11 +80,12 @@ class FirstFragment : Fragment() {
                 return false
             }
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                delete(adapter.getItem(viewHolder.absoluteAdapterPosition))
+                val position = viewHolder.bindingAdapterPosition
+                delete(adapter.getItem(position))
+                adapter.removeFromList(position)
+                binding.rvProductList.adapter?.notifyItemRemoved(position)
             }
         }).attachToRecyclerView(binding.rvProductList)
-
-
     }
 
     override fun onDestroyView() {
@@ -93,23 +94,23 @@ class FirstFragment : Fragment() {
     }
 
     fun delete(product: String ) {
-      viewModel.deleteProduct(
-          product
-      ).observe(viewLifecycleOwner, { result ->
-          when (result) {
-              is Resource.Loading -> {
-              }
-              is Resource.Success -> {
-                  Toast.makeText(requireContext(), "Producto Eliminado", Toast.LENGTH_SHORT).show()
-              }
-              is Resource.Failure -> {
-                  Toast.makeText(
-                      requireContext(),
-                      "Ocurrio un error: ${result.exception}",
-                      Toast.LENGTH_LONG
-                  ).show()
-              }
-          }
-      })
-  }
+        viewModel.deleteProduct(
+            product
+        ).observe(viewLifecycleOwner, { result ->
+            when (result) {
+                is Resource.Loading -> {
+                }
+                is Resource.Success -> {
+                    Toast.makeText(requireContext(), "Producto Eliminado", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Failure -> {
+                    Toast.makeText(
+                        requireContext(),
+                        "Ocurrio un error: ${result.exception}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        })
+    }
 }

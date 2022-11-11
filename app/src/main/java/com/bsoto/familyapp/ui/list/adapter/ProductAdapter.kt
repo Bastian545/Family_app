@@ -12,8 +12,7 @@ import com.bsoto.familyapp.core.BaseViewHolder
 import com.bsoto.familyapp.data.model.Product
 import com.bsoto.familyapp.databinding.ProductItemViewBinding
 import kotlinx.coroutines.awaitAll
-
-class ProductAdapter(private val productList: List<Product>) :
+class ProductAdapter(private val productList: MutableList<Product>) :
     RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
@@ -38,19 +37,17 @@ class ProductAdapter(private val productList: List<Product>) :
         return productList.get(position-1).id
     }
 
+    fun removeFromList(position: Int){
+        productList.removeAt(position)
+    }
 
     private inner class ProductViewHolder(
         val binding: ProductItemViewBinding
     ) : BaseViewHolder<Product>(binding.root) {
         override fun bind(item: Product) {
-            if(item.quantity !=0){
-                binding.rvQuantity.text = "Cantidad: ${item.quantity}"
-            }
-
+            if(item.quantity != 0){binding.rvQuantity.text = "Cantidad: ${item.quantity}"}
             binding.rvName.text = item.name
             binding.rvComment.text = item.comment
-
         }
     }
 }
-
