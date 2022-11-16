@@ -113,4 +113,10 @@ class FirstFragment : Fragment() {
             }
         })
     }
+
+
+    fun deletex(product: String ) {
+        viewModel.deleteProduct(
+            product
+        )}
 }

@@ -1,7 +1,8 @@
 package com.bsoto.familyapp.data.model
 
+import androidx.room.Entity
 import com.google.firebase.firestore.Exclude
-
+@Entity
 data class Product(
     @Exclude
     var id: String ="",

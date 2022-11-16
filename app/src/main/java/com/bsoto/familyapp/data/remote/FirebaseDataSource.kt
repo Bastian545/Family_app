@@ -27,7 +27,6 @@ class FirebaseDataSource {
     suspend fun newProduct(name: String, comment: String, quantity: Int) {
         FirebaseFirestore.getInstance().collection("products").add(
             Product(
-
                 name = name,
                 comment = comment,
                 quantity = quantity,

@@ -39,6 +39,7 @@ class ProductAdapter(private val productList: MutableList<Product>) :
 
     fun removeFromList(position: Int){
         productList.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     private inner class ProductViewHolder(
