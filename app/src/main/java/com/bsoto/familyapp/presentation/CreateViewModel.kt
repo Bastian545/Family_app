@@ -1,13 +1,10 @@
 package com.bsoto.familyapp.presentation
 
-import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
 import com.bsoto.familyapp.core.Resource
 import com.bsoto.familyapp.domain.repo.ProductRepo
-import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.Dispatchers
 
 class CreateViewModel(

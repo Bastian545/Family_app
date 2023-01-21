@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.FamilyApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
@@ -6,12 +6,15 @@
         <item name="colorSecondary">@color/dark_blue</item>
         <item name="colorAccent">@color/white</item>
         <item name="android:fontFamily">@font/reem</item>
-
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.FamilyApp" parent="Base.Theme.FamilyApp" />
 
     <style name="SplashTheme" parent="Base.Theme.FamilyApp">
+        <item name="android:statusBarColor">@color/main_blue</item>
+        <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
 </resources>

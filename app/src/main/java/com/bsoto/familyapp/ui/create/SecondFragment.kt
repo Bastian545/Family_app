@@ -1,10 +1,9 @@
 package com.bsoto.familyapp.ui.create
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bsoto.familyapp.R
@@ -14,7 +13,6 @@ import com.bsoto.familyapp.databinding.FragmentSecondBinding
 import com.bsoto.familyapp.domain.repo.ProductRepoImpl
 import com.bsoto.familyapp.presentation.CreateViewModel
 import com.bsoto.familyapp.presentation.CreateViewModelFactory
-import com.bsoto.familyapp.ui.list.adapter.ProductAdapter
 
 class SecondFragment : Fragment(R.layout.fragment_second) {
     private lateinit var binding: FragmentSecondBinding

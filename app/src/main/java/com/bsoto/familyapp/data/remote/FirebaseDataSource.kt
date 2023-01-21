@@ -2,12 +2,8 @@ package com.bsoto.familyapp.data.remote
 
 import com.bsoto.familyapp.core.Resource
 import com.bsoto.familyapp.data.model.Product
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.type.Date
 import kotlinx.coroutines.tasks.await
-import java.time.LocalDate
-import java.util.*
 
 class FirebaseDataSource {
     suspend fun getProducts(): Resource<MutableList<Product>> {

@@ -1,11 +1,15 @@
 package com.bsoto.familyapp.ui.list
 
+import android.graphics.Color
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -39,24 +43,35 @@ class FirstFragment : Fragment() {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val productList = mutableListOf<Product>()
         var adapter = ProductAdapter(productList)
+
+        val window = requireActivity().window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+
+
         binding.floatNew.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 
-        viewModel.fetchProducts().observe(viewLifecycleOwner, Observer {
+        viewModel.fetchProducts().observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
+                    window.statusBarColor =
+                        ContextCompat.getColor(requireActivity(), R.color.main_blue)
+
                 }
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     adapter = ProductAdapter(it.data)
+                    window.statusBarColor = Color.WHITE
+
                     binding.rvProductList.adapter = ProductAdapter(it.data)
                 }
                 is Resource.Failure -> {
@@ -68,7 +83,7 @@ class FirstFragment : Fragment() {
                     ).show()
                 }
             }
-        })
+        }
         binding.rvProductList.adapter = ProductAdapter(productList)
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
@@ -96,12 +111,13 @@ class FirstFragment : Fragment() {
     fun delete(product: String ) {
         viewModel.deleteProduct(
             product
-        ).observe(viewLifecycleOwner, { result ->
+        ).observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Resource.Loading -> {
                 }
                 is Resource.Success -> {
-                    Toast.makeText(requireContext(), "Producto Eliminado", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Producto Eliminado", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 is Resource.Failure -> {
                     Toast.makeText(
@@ -111,12 +127,12 @@ class FirstFragment : Fragment() {
                     ).show()
                 }
             }
-        })
+        }
     }
 
 
-    fun deletex(product: String ) {
+    /*fun deletex(product: String ) {
         viewModel.deleteProduct(
             product
-        )}
+        )}*/
 }
